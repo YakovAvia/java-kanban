@@ -1,3 +1,5 @@
+package task;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +24,19 @@ public class Epic extends Task {
     }
 
     @Override
+    public void setStatus(TaskStatus status) {
+        super.setStatus(status);
+        for (Subtask subtask : subtasks) {
+            subtask.setStatus(status);
+        }
+    }
+
+    @Override
     public TaskStatus getStatus() {
-        if (subtasks.isEmpty() || subtasks.stream().allMatch(subtask -> subtask.getStatus() == TaskStatus.NEW)) {
+        if (subtasks.isEmpty()) {
+            return TaskStatus.NEW;
+        }
+        if (subtasks.stream().allMatch(subtask -> subtask.getStatus() == TaskStatus.NEW)) {
             return TaskStatus.NEW;
         } else if (subtasks.stream().allMatch(subtask -> subtask.getStatus() == TaskStatus.DONE)) {
             return TaskStatus.DONE;

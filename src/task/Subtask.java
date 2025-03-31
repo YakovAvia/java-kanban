@@ -1,3 +1,5 @@
+package task;
+
 public class Subtask extends Task {
 
     private int epicId; // ID эпика, к которому относится подзадача

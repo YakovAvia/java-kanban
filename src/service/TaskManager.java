@@ -1,3 +1,9 @@
+package service;
+
+import task.Epic;
+import task.Subtask;
+import task.Task;
+
 import java.util.*;
 
 public class TaskManager {
@@ -60,6 +66,10 @@ public class TaskManager {
         tasks.remove(id);
     }
 
+    public void removeAllTasks() {
+        tasks.clear();
+    }
+
     public void removeSubtask(int id) {
         Subtask subtask = subtasks.remove(id);
         if (subtask != null && epics.containsKey(subtask.getEpicId())) {
@@ -81,5 +91,9 @@ public class TaskManager {
             return epics.get(epicId).getSubtasks();
         }
         return Collections.emptyList();
+    }
+
+    public void updateTask(Task task) {
+        tasks.put(task.getId(), task);
     }
 }
